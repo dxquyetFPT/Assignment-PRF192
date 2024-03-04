@@ -176,6 +176,24 @@ void displayMenu()
 void addNewStudent()
 {
 	// Write code here
+	printf("Nhap ma sinh vien: ");
+    scanf("%s", &id[size]);
+    
+    printf("\nNhap ten sinh vien: ");
+    scanf(" %[^\n]", &name[size]); 
+
+    printf("\nNhap diem Toan: ");
+    scanf("%lf", &diemToan[size]);
+
+    printf("\nNhap diem Ly: ");
+    scanf("%lf", &diemLy[size]);
+
+    printf("\nNhap diem Hoa: ");
+    scanf("%lf", &diemHoa[size]);
+
+    diemTb[size] = (diemToan[size] + diemLy[size] + diemHoa[size]) / 3.0f;
+ 
+	size++;    
 }
 
 /*
@@ -196,6 +214,26 @@ void printListOfStudent()
 void searchStudentById()
 {
 	// Write code here
+	char ID[32];
+	printf("Nhap ID:");
+	scanf("%s",&ID);
+	int count=0;
+	int i=0;
+	for(i=0;i<size;i++){
+		if (strcmp(id[i], ID) == 0) {
+			printf("Thong tin sinh  vien:\n");
+			printf("Ma sinh vien:%s\n",id[i]);
+			printf("Ho va ten:%s\n",name[i]);
+			printf("Diem Toan:%.2f\n",diemToan[i]);
+			printf("Diem Hoa:%.2f\n",diemHoa[i]);
+			printf("Diem Ly:%.2f\n",diemLy[i]);
+			printf("Diem Trung Binh:%.2f\n",diemTb[i]);
+			count++;
+		}
+	}
+	if(count==0){
+		printf("khong tim thay sinh vien\n");
+	}
 }
 
 /*
@@ -206,6 +244,12 @@ void searchStudentById()
 void calculateTheAverageScore()
 {
 	// Write code here
+	double total = 0.0; // Su dung double cho tung diem
+    int i;
+    for (i = 0; i < size; i++) {
+        total += diemTb[i];
+    }
+    printf("\nDiem trung binh cua tat ca sinh vien la: %.2lf\n", total / size); // Tra ve gia tri double
 }
 
 /*
