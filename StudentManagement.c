@@ -24,6 +24,11 @@ void printListOfStudent();
 void searchStudentById();
 void calculateTheAverageScore();
 void sortListOfStudentByAverageScore();
+void sortListOfStudentBySubject();
+void findStudentsByKeyword();
+void deleteStudentById();
+void updateStudentById();
+void gradingStudents();
 
 /*
 	author: Duong Xuan Quyet
@@ -165,6 +170,12 @@ void displayMenu()
 	printf("3. Tim kiem sinh vien theo ID\n");
 	printf("4. Tinh diem trung binh cua tat ca sinh vien\n");
 	printf("5. Sap xep danh sach sinh vien theo diem trung binh\n");
+	printf("6. in danh sach ra file students.out\n");
+	printf("7. sap xep sinh vien theo diem thanh phan\n");
+	printf("8. tim sinh vien bang tu khoa\n");
+	printf("9. xoa sinh vien bang id\n");
+	printf("10. chinh sua sinh vien bang id\n");
+	printf("11. xep loai hoc luc sinh vien\n");
 	printf("0. Thoat\n");
 }
 
@@ -177,23 +188,23 @@ void addNewStudent()
 {
 	// Write code here
 	printf("Nhap ma sinh vien: ");
-    scanf("%s", &id[size]);
-    
-    printf("\nNhap ten sinh vien: ");
-    scanf(" %[^\n]", &name[size]); 
+	scanf("%s", &id[size]);
 
-    printf("\nNhap diem Toan: ");
-    scanf("%lf", &diemToan[size]);
+	printf("\nNhap ten sinh vien: ");
+	scanf(" %[^\n]", &name[size]);
 
-    printf("\nNhap diem Ly: ");
-    scanf("%lf", &diemLy[size]);
+	printf("\nNhap diem Toan: ");
+	scanf("%lf", &diemToan[size]);
 
-    printf("\nNhap diem Hoa: ");
-    scanf("%lf", &diemHoa[size]);
+	printf("\nNhap diem Ly: ");
+	scanf("%lf", &diemLy[size]);
 
-    diemTb[size] = (diemToan[size] + diemLy[size] + diemHoa[size]) / 3.0f;
- 
-	size++;    
+	printf("\nNhap diem Hoa: ");
+	scanf("%lf", &diemHoa[size]);
+
+	diemTb[size] = (diemToan[size] + diemLy[size] + diemHoa[size]) / 3.0f;
+
+	size++;
 }
 
 /*
@@ -204,6 +215,13 @@ void addNewStudent()
 void printListOfStudent()
 {
 	// Write code here
+	int i;
+	printf("===== ID =========== Ho ten ========= Toan == Ly == Hoa == Diem trung binh ====\n");
+	for (i = 0; i < size; i++)
+	{
+		printf("%-12s | %-20s | %2.2lf | %2.2lf | %2.2lf | %2.2lf\n",
+			   id[i], name[i], diemToan[i], diemLy[i], diemHoa[i], diemTb[i]);
+	}
 }
 
 /*
@@ -216,22 +234,25 @@ void searchStudentById()
 	// Write code here
 	char ID[32];
 	printf("Nhap ID:");
-	scanf("%s",&ID);
-	int count=0;
-	int i=0;
-	for(i=0;i<size;i++){
-		if (strcmp(id[i], ID) == 0) {
+	scanf("%s", &ID);
+	int count = 0;
+	int i = 0;
+	for (i = 0; i < size; i++)
+	{
+		if (strcmp(id[i], ID) == 0)
+		{
 			printf("Thong tin sinh  vien:\n");
-			printf("Ma sinh vien:%s\n",id[i]);
-			printf("Ho va ten:%s\n",name[i]);
-			printf("Diem Toan:%.2f\n",diemToan[i]);
-			printf("Diem Hoa:%.2f\n",diemHoa[i]);
-			printf("Diem Ly:%.2f\n",diemLy[i]);
-			printf("Diem Trung Binh:%.2f\n",diemTb[i]);
+			printf("Ma sinh vien:%s\n", id[i]);
+			printf("Ho va ten:%s\n", name[i]);
+			printf("Diem Toan:%.2f\n", diemToan[i]);
+			printf("Diem Hoa:%.2f\n", diemHoa[i]);
+			printf("Diem Ly:%.2f\n", diemLy[i]);
+			printf("Diem Trung Binh:%.2f\n", diemTb[i]);
 			count++;
 		}
 	}
-	if(count==0){
+	if (count == 0)
+	{
 		printf("khong tim thay sinh vien\n");
 	}
 }
@@ -245,11 +266,12 @@ void calculateTheAverageScore()
 {
 	// Write code here
 	double total = 0.0; // Su dung double cho tung diem
-    int i;
-    for (i = 0; i < size; i++) {
-        total += diemTb[i];
-    }
-    printf("\nDiem trung binh cua tat ca sinh vien la: %.2lf\n", total / size); // Tra ve gia tri double
+	int i;
+	for (i = 0; i < size; i++)
+	{
+		total += diemTb[i];
+	}
+	printf("\nDiem trung binh cua tat ca sinh vien la: %.2lf\n", total / size); // Tra ve gia tri double
 }
 
 /*
@@ -260,6 +282,115 @@ void calculateTheAverageScore()
 void sortListOfStudentByAverageScore()
 {
 	// Write code here
+	int i = 0;
+	int j = 0;
+	char tempid[N_MAX][20];
+	char tempname[N_MAX][255];
+	double tempdiemTb[N_MAX];
+	double tempdiemToan[N_MAX];
+	double tempdiemLy[N_MAX];
+	double tempdiemHoa[N_MAX];
+	for (i = 0; i < size; i++)
+	{
+		strcpy(tempid[i], id[i]);
+		strcpy(tempname[i], name[i]);
+		tempdiemTb[i] = diemTb[i];
+		tempdiemToan[i] = diemToan[i];
+		tempdiemLy[i] = diemLy[i];
+		tempdiemHoa[i] = diemHoa[i];
+	}
+	char temp[20];
+	char temp1[255];
+	double temp2;
+	for (i = 0; i < size - 1; i++)
+	{
+		for (j = i + 1; j < size; j++)
+		{
+			if (tempdiemTb[i] < tempdiemTb[j])
+			{
+
+				strcpy(temp, tempid[i]);
+				strcpy(tempid[i], tempid[j]);
+				strcpy(tempid[j], temp);
+
+				strcpy(temp1, tempname[i]);
+				strcpy(tempname[i], tempname[j]);
+				strcpy(tempname[j], temp1);
+
+				temp2 = tempdiemTb[i];
+				tempdiemTb[i] = tempdiemTb[j];
+				tempdiemTb[j] = temp2;
+
+				temp2 = tempdiemToan[i];
+				tempdiemToan[i] = tempdiemToan[j];
+				tempdiemToan[j] = temp2;
+
+				temp2 = tempdiemLy[i];
+				tempdiemLy[i] = tempdiemLy[j];
+				tempdiemLy[j] = temp2;
+
+				temp2 = tempdiemHoa[i];
+				tempdiemHoa[i] = tempdiemHoa[j];
+				tempdiemHoa[j] = temp2;
+			}
+		}
+	}
+	printf("===== ID =========== Ho ten ========= Toan == Ly == Hoa == Diem trung binh ====\n");
+	for (i = 0; i < size; i++)
+	{
+		printf("%-12s | %-20s | %2.2lf | %2.2lf | %2.2lf | %2.2lf\n",
+			   tempid[i], tempname[i], tempdiemToan[i], tempdiemLy[i], tempdiemHoa[i], tempdiemTb[i]);
+	}
+}
+
+/*
+	author: Tran Thanh Hai
+	function : sortListOfStudentBySubject
+	description: sort list of Student by Subject Score don't change root array and print list to screen
+*/
+void sortListOfStudentBySubject()
+{
+	// code here
+}
+
+/*
+	author: Duong Xuan Quyet
+	function : findStudentsByKeyword
+	description: find student by keyword input from screen
+*/
+void findStudentsByKeyword()
+{
+	// code here
+}
+
+/*
+	author: Tran Thanh Hai
+	function : deleteStudentById
+	description: delete Student By Id input from screen
+*/
+void deleteStudentById()
+{
+	// code here
+}
+
+/*
+	author: Duong Xuan Quyet
+	function : updateStudentById
+	description: update student by id input from screen
+*/
+void updateStudentById()
+{
+	// code here
+}
+
+/*
+	author: Duong Xuan Quyet
+	function : gradingStudents
+	description: grading Students and print to screen
+*/
+void gradingStudents()
+{
+	// code here
 }
 
 int main()
@@ -297,6 +428,28 @@ int main()
 		case 5:
 			sortListOfStudentByAverageScore();
 			break;
+		case 6:
+			if (!processWriteFile(fo))
+			{
+				printf("Write file fail\n");
+				return 1;
+			}
+			break;
+		case 7:
+			sortListOfStudentBySubject();
+			break;
+		case 8:
+			findStudentsByKeyword();
+			break;
+		case 9:
+			deleteStudentById();
+			break;
+		case 10:
+			updateStudentById();
+			break;
+		case 11:
+			gradingStudents();
+			break;
 		case 0:
 			printf("Tam biet!\n");
 			break;
@@ -306,10 +459,5 @@ int main()
 		}
 	} while (choice != 0);
 
-	if (!processWriteFile(fo))
-	{
-		printf("Write file fail\n");
-		return 1;
-	}
 	return 0;
 }
