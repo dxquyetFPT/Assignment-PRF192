@@ -348,9 +348,224 @@ void sortListOfStudentByAverageScore()
 	function : sortListOfStudentBySubject
 	description: sort list of Student by Subject Score don't change root array and print list to screen
 */
+void sortListOfStudentByMaths(){
+	// code here
+	int i = 0;
+	int j = 0;
+	char tempid[N_MAX][20];
+	char tempname[N_MAX][255];
+	double tempdiemTb[N_MAX];
+	double tempdiemToan[N_MAX];
+	double tempdiemLy[N_MAX];
+	double tempdiemHoa[N_MAX];
+	for (i = 0; i < size; i++)
+	{
+		strcpy(tempid[i], id[i]);
+		strcpy(tempname[i], name[i]);
+		tempdiemTb[i] = diemTb[i];
+		tempdiemToan[i] = diemToan[i];
+		tempdiemLy[i] = diemLy[i];
+		tempdiemHoa[i] = diemHoa[i];
+	}
+	char temp[20];
+	char temp1[255];
+	double temp2;
+	for (i = 0; i < size - 1; i++)
+	{
+		for (j = i + 1; j < size; j++)
+		{
+			if (tempdiemToan[i] < tempdiemToan[j])
+			{
+
+				strcpy(temp, tempid[i]);
+				strcpy(tempid[i], tempid[j]);
+				strcpy(tempid[j], temp);
+
+				strcpy(temp1, tempname[i]);
+				strcpy(tempname[i], tempname[j]);
+				strcpy(tempname[j], temp1);
+
+				temp2 = tempdiemTb[i];
+				tempdiemTb[i] = tempdiemTb[j];
+				tempdiemTb[j] = temp2;
+
+				temp2 = tempdiemToan[i];
+				tempdiemToan[i] = tempdiemToan[j];
+				tempdiemToan[j] = temp2;
+
+				temp2 = tempdiemLy[i];
+				tempdiemLy[i] = tempdiemLy[j];
+				tempdiemLy[j] = temp2;
+
+				temp2 = tempdiemHoa[i];
+				tempdiemHoa[i] = tempdiemHoa[j];
+				tempdiemHoa[j] = temp2;
+			}
+		}
+	}
+	printf("===== ID =========== Ho ten ========= Toan == Ly == Hoa == Diem trung binh ====\n");
+	for (i = 0; i < size; i++)
+	{
+		printf("%-12s | %-20s | %2.2lf | %2.2lf | %2.2lf | %2.2lf\n",
+			   tempid[i], tempname[i], tempdiemToan[i], tempdiemLy[i], tempdiemHoa[i], tempdiemTb[i]);
+	}
+}
+void sortListOfStudentByPhysical(){
+	// code here
+	int i = 0;
+	int j = 0;
+	char tempid[N_MAX][20];
+	char tempname[N_MAX][255];
+	double tempdiemTb[N_MAX];
+	double tempdiemToan[N_MAX];
+	double tempdiemLy[N_MAX];
+	double tempdiemHoa[N_MAX];
+	for (i = 0; i < size; i++)
+	{
+		strcpy(tempid[i], id[i]);
+		strcpy(tempname[i], name[i]);
+		tempdiemTb[i] = diemTb[i];
+		tempdiemToan[i] = diemToan[i];
+		tempdiemLy[i] = diemLy[i];
+		tempdiemHoa[i] = diemHoa[i];
+	}
+	char temp[20];
+	char temp1[255];
+	double temp2;
+	for (i = 0; i < size - 1; i++)
+	{
+		for (j = i + 1; j < size; j++)
+		{
+			if (tempdiemLy[i] < tempdiemLy[j])
+			{
+
+				strcpy(temp, tempid[i]);
+				strcpy(tempid[i], tempid[j]);
+				strcpy(tempid[j], temp);
+
+				strcpy(temp1, tempname[i]);
+				strcpy(tempname[i], tempname[j]);
+				strcpy(tempname[j], temp1);
+
+				temp2 = tempdiemTb[i];
+				tempdiemTb[i] = tempdiemTb[j];
+				tempdiemTb[j] = temp2;
+
+				temp2 = tempdiemToan[i];
+				tempdiemToan[i] = tempdiemToan[j];
+				tempdiemToan[j] = temp2;
+
+				temp2 = tempdiemLy[i];
+				tempdiemLy[i] = tempdiemLy[j];
+				tempdiemLy[j] = temp2;
+
+				temp2 = tempdiemHoa[i];
+				tempdiemHoa[i] = tempdiemHoa[j];
+				tempdiemHoa[j] = temp2;
+			}
+		}
+	}
+	printf("===== ID =========== Ho ten ========= Toan == Ly == Hoa == Diem trung binh ====\n");
+	for (i = 0; i < size; i++)
+	{
+		printf("%-12s | %-20s | %2.2lf | %2.2lf | %2.2lf | %2.2lf\n",
+			   tempid[i], tempname[i], tempdiemToan[i], tempdiemLy[i], tempdiemHoa[i], tempdiemTb[i]);
+	}
+}
+void sortListOfStudentByChemistry(){
+	// code here
+	int i = 0;
+	int j = 0;
+	char tempid[N_MAX][20];
+	char tempname[N_MAX][255];
+	double tempdiemTb[N_MAX];
+	double tempdiemToan[N_MAX];
+	double tempdiemLy[N_MAX];
+	double tempdiemHoa[N_MAX];
+	for (i = 0; i < size; i++)
+	{
+		strcpy(tempid[i], id[i]);
+		strcpy(tempname[i], name[i]);
+		tempdiemTb[i] = diemTb[i];
+		tempdiemToan[i] = diemToan[i];
+		tempdiemLy[i] = diemLy[i];
+		tempdiemHoa[i] = diemHoa[i];
+	}
+	char temp[20];
+	char temp1[255];
+	double temp2;
+	for (i = 0; i < size - 1; i++)
+	{
+		for (j = i + 1; j < size; j++)
+		{
+			if (tempdiemHoa[i] < tempdiemHoa[j])
+			{
+
+				strcpy(temp, tempid[i]);
+				strcpy(tempid[i], tempid[j]);
+				strcpy(tempid[j], temp);
+
+				strcpy(temp1, tempname[i]);
+				strcpy(tempname[i], tempname[j]);
+				strcpy(tempname[j], temp1);
+
+				temp2 = tempdiemTb[i];
+				tempdiemTb[i] = tempdiemTb[j];
+				tempdiemTb[j] = temp2;
+
+				temp2 = tempdiemToan[i];
+				tempdiemToan[i] = tempdiemToan[j];
+				tempdiemToan[j] = temp2;
+
+				temp2 = tempdiemLy[i];
+				tempdiemLy[i] = tempdiemLy[j];
+				tempdiemLy[j] = temp2;
+
+				temp2 = tempdiemHoa[i];
+				tempdiemHoa[i] = tempdiemHoa[j];
+				tempdiemHoa[j] = temp2;
+			}
+		}
+	}
+	printf("===== ID =========== Ho ten ========= Toan == Ly == Hoa == Diem trung binh ====\n");
+	for (i = 0; i < size; i++)
+	{
+		printf("%-12s | %-20s | %2.2lf | %2.2lf | %2.2lf | %2.2lf\n",
+			   tempid[i], tempname[i], tempdiemToan[i], tempdiemLy[i], tempdiemHoa[i], tempdiemTb[i]);
+	}
+}
 void sortListOfStudentBySubject()
 {
 	// code here
+	printf("Menu 2:\n");
+	printf("1. Sap xep danh sach sinh vien theo diem toan\n");
+	printf("2. Sap xep danh sach sinh vien theo diem ly\n");
+	printf("3. Sap xep danh sach sinh vien theo diem hoa\n");
+	int choice;
+	do
+	{
+		printf("Nhap lua chon cua ban: ");
+		scanf("%d", &choice);
+
+		switch (choice)
+		{
+		case 1:
+			sortListOfStudentByMaths();
+			break;
+		case 2:
+			sortListOfStudentByPhysical();
+			break;
+		case 3:
+			sortListOfStudentByChemistry();
+			break;
+		case 0:
+			printf("Thoat Menu 2! \n");
+			break;
+		default:
+			printf("Lua chon khong hop le. Vui long nhap lai.\n");
+			break;
+		}
+	} while (choice != 0);
 }
 
 /*
@@ -371,6 +586,34 @@ void findStudentsByKeyword()
 void deleteStudentById()
 {
 	// code here
+	char ID[32];
+	printf("Nhap ID:");
+	scanf("%s", &ID);
+	int count = 0;
+	int i = 0;
+	int j;
+	for (i = 0; i < size; i++)
+	{
+		if (strcmp(id[i], ID) == 0)
+		{
+			count = 1;
+			for (j = i; j < size; j++) {
+                strcpy(id[j], id[j+1]);
+				strcpy(name[j], name[j+1]);
+				diemTb[j] = diemTb[j+1];
+				diemToan[j] = diemToan[j+1];
+				diemLy[j] = diemLy[j+1];
+				diemHoa[j] = diemHoa[j+1];
+            }
+            size--;
+            printf("Da xoa sinh vien co ID = %s \n", ID);
+            break;
+		}
+	}
+	if (count == 0)
+	{
+		printf("khong tim thay sinh vien\n");
+	}
 }
 
 /*
