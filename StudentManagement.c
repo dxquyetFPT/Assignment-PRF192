@@ -541,6 +541,7 @@ void sortListOfStudentBySubject()
 {
 	// code here
 	printf("Menu 2:\n");
+	printf("0. Thoat menu!\n");
 	printf("1. Sap xep danh sach sinh vien theo diem toan\n");
 	printf("2. Sap xep danh sach sinh vien theo diem ly\n");
 	printf("3. Sap xep danh sach sinh vien theo diem hoa\n");
