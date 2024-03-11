@@ -348,7 +348,8 @@ void sortListOfStudentByAverageScore()
 	function : sortListOfStudentBySubject
 	description: sort list of Student by Subject Score don't change root array and print list to screen
 */
-void sortListOfStudentByMaths(){
+void sortListOfStudentByMaths()
+{
 	// code here
 	int i = 0;
 	int j = 0;
@@ -410,7 +411,8 @@ void sortListOfStudentByMaths(){
 			   tempid[i], tempname[i], tempdiemToan[i], tempdiemLy[i], tempdiemHoa[i], tempdiemTb[i]);
 	}
 }
-void sortListOfStudentByPhysical(){
+void sortListOfStudentByPhysical()
+{
 	// code here
 	int i = 0;
 	int j = 0;
@@ -472,7 +474,8 @@ void sortListOfStudentByPhysical(){
 			   tempid[i], tempname[i], tempdiemToan[i], tempdiemLy[i], tempdiemHoa[i], tempdiemTb[i]);
 	}
 }
-void sortListOfStudentByChemistry(){
+void sortListOfStudentByChemistry()
+{
 	// code here
 	int i = 0;
 	int j = 0;
@@ -570,12 +573,50 @@ void sortListOfStudentBySubject()
 
 /*
 	author: Duong Xuan Quyet
+	function : checkKeywordOnName
+	description: check keyword exist on the name
+*/
+int checkKeywordOnName(char *keyWord, char *name)
+{
+	char tempName[255];
+	strcpy(tempName, name);
+	strupr(tempName);
+	char tempKeyword[255];
+	strcpy(tempKeyword, keyWord);
+	strupr(tempKeyword);
+	if (strstr(tempName, tempKeyword) != NULL)
+		return 1;
+	return 0;
+}
+
+/*
+	author: Duong Xuan Quyet
 	function : findStudentsByKeyword
 	description: find student by keyword input from screen
 */
 void findStudentsByKeyword()
 {
-	// code here
+	char keyword[255];
+	getchar();
+	printf("nhap tu khoa:");
+	scanf("%[^\n]", &keyword);
+	int count = 0;
+	int i = 0;
+	printf("danh sach sinh vien chua %s la:\n", keyword);
+	printf("===== ID =========== Ho ten ========= Toan == Ly == Hoa == Diem trung binh ====\n");
+	for (i = 0; i < size; i++)
+	{
+		if (checkKeywordOnName(keyword, name[i]))
+		{
+			count++;
+			printf("%-12s | %-20s | %2.2lf | %2.2lf | %2.2lf | %2.2lf\n",
+				   id[i], name[i], diemToan[i], diemLy[i], diemHoa[i], diemTb[i]);
+		}
+	}
+	if (!count)
+	{
+		printf("khong tim thay sinh vien\n");
+	}
 }
 
 /*
@@ -597,17 +638,18 @@ void deleteStudentById()
 		if (strcmp(id[i], ID) == 0)
 		{
 			count = 1;
-			for (j = i; j < size; j++) {
-                strcpy(id[j], id[j+1]);
-				strcpy(name[j], name[j+1]);
-				diemTb[j] = diemTb[j+1];
-				diemToan[j] = diemToan[j+1];
-				diemLy[j] = diemLy[j+1];
-				diemHoa[j] = diemHoa[j+1];
-            }
-            size--;
-            printf("Da xoa sinh vien co ID = %s \n", ID);
-            break;
+			for (j = i; j < size; j++)
+			{
+				strcpy(id[j], id[j + 1]);
+				strcpy(name[j], name[j + 1]);
+				diemTb[j] = diemTb[j + 1];
+				diemToan[j] = diemToan[j + 1];
+				diemLy[j] = diemLy[j + 1];
+				diemHoa[j] = diemHoa[j + 1];
+			}
+			size--;
+			printf("Da xoa sinh vien co ID = %s \n", ID);
+			break;
 		}
 	}
 	if (count == 0)
@@ -623,7 +665,51 @@ void deleteStudentById()
 */
 void updateStudentById()
 {
-	// code here
+	char ID[20];
+	printf("Nhap ma sinh vien can cap nhat: ");
+	scanf("%s", ID);
+
+	strupr(ID);
+
+	int found = 0;
+	int i;
+	for (i = 0; i < size; i++)
+	{
+		if (strcmp(id[i], ID) == 0)
+		{
+			found = 1;
+			printf("Thong tin hien tai cua sinh vien:\n");
+			printf("Ma sinh vien: %s\n", id[i]);
+			printf("Ho va ten: %s\n", name[i]);
+			printf("Diem Toan: %.2lf\n", diemToan[i]);
+			printf("Diem Ly: %.2lf\n", diemLy[i]);
+			printf("Diem Hoa: %.2lf\n", diemHoa[i]);
+
+			printf("\nNhap thong tin moi cho sinh vien :\n");
+
+			printf("Nhap ten moi: ");
+			scanf(" %[^\n]", name[i]);
+
+			printf("Nhap diem Toan moi: ");
+			scanf("%lf", &diemToan[i]);
+
+			printf("Nhap diem Ly moi: ");
+			scanf("%lf", &diemLy[i]);
+
+			printf("Nhap diem Hoa moi: ");
+			scanf("%lf", &diemHoa[i]);
+
+			diemTb[i] = (diemToan[i] + diemLy[i] + diemHoa[i]) / 3.0;
+
+			printf("Cap nhat sinh vien thanh cong!\n");
+			break;
+		}
+	}
+
+	if (!found)
+	{
+		printf("Khong tim thay sinh vien voi ma so %s\n", ID);
+	}
 }
 
 /*
@@ -633,7 +719,28 @@ void updateStudentById()
 */
 void gradingStudents()
 {
-	// code here
+	const int numClasses = 6;
+	const double classBoundaries[6] = {9.0, 8.0, 7.0, 6.0, 5.0, 0.0};
+	const char classNames[6][40] = {"Xuat sac", "Gioi", "Kha", "Trung Binh Kha", "Trung binh", "Yeu"};
+
+	printf("===== ID =========== Ho ten ========= Toan == Ly == Hoa == Diem trung binh ==== Xep loai ====\n");
+	int i, j;
+	for (i = 0; i < size; i++)
+	{
+		char classRank[40] = "";
+
+		for (j = 0; j < numClasses; j++)
+		{
+			if (diemTb[i] >= classBoundaries[j])
+			{
+				strcpy(classRank, classNames[j]);
+				break;
+			}
+		}
+
+		printf("%-12s | %-20s | %2.2lf | %2.2lf | %2.2lf | %2.2lf | %s\n",
+			   id[i], name[i], diemToan[i], diemLy[i], diemHoa[i], diemTb[i], classRank);
+	}
 }
 
 int main()
